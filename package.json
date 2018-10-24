@@ -1,0 +1,23 @@
+{
+  "name": "tdd-playground",
+  "version": "1.0.0",
+  "description": "Learn TDD",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "is-number": "^7.0.0"
+  },
+  "devDependencies": {
+    "intelli-espower-loader": "^1.0.1",
+    "mocha": "^5.2.0",
+    "power-assert": "^1.6.1"
+  },
+  "scripts": {
+    "test": "mocha --require intelli-espower-loader"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
