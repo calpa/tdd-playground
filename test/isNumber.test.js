@@ -1,10 +1,10 @@
+// From isNumber test.js
 "use strict";
 
 const assert = require("assert");
-const isNumber = require("is-number");
-const myIsNumber = require("../src/isNumber");
+const isNumber = require("../src/isNumber");
 
-const isSameResult = num => isNumber(num) === myIsNumber(num);
+const isSameResult = (num, boolean) => isNumber(num) === boolean;
 
 describe("is a number", () => {
   const fixtures = [
@@ -94,10 +94,10 @@ describe("is a number", () => {
     +new Date()
   ];
 
-  fixtures.forEach(function(num, idx) {
+  fixtures.forEach((num, idx) => {
     it(JSON.stringify(num) + " should be a number", () => {
       assert(
-        isSameResult(num),
+        isSameResult(num, true),
         'expected "' + String(num) + '" to be a number'
       );
     });
@@ -143,10 +143,10 @@ describe("is not a number", () => {
     {}
   ];
 
-  fixtures.forEach(function(num) {
+  fixtures.forEach(num => {
     it(JSON.stringify(num) + " should not be a number", function() {
       assert(
-        isSameResult(num),
+        isSameResult(num, false),
         'expected "' + String(num) + '" to not be a number'
       );
     });
