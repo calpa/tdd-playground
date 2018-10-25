@@ -1,6 +1,6 @@
 module.exports = () => ({
-  files: ["src/*.js"],
-  tests: ["test/*.js"],
+  files: ["src/**/*.js"],
+  tests: ["test/**/*.js"],
   debug: true,
   env: {
     type: "node"
