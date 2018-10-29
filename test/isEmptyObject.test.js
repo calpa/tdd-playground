@@ -1,18 +1,16 @@
-const assert = require("assert");
+const test = require("ava");
 const isEmptyObject = require("../src/isEmptyObject");
 
-describe("isEmptyObject(obj)", () => {
-  it("should be true", () => {
-    assert(isEmptyObject({}));
-  });
+test("isEmptyObject(obj) should be true", t => {
+  t.true(isEmptyObject({}));
+});
 
-  it("should be false", () => {
-    assert(!isEmptyObject(null));
-    assert(!isEmptyObject(undefined));
-    assert(!isEmptyObject("Hello"));
+test("should be false", t => {
+  t.false(isEmptyObject(null));
+  t.false(isEmptyObject(undefined));
+  t.false(isEmptyObject("Hello"));
 
-    assert(!isEmptyObject([1, 2, 3]));
-    assert(!isEmptyObject({ one: 1 }));
-    assert(!isEmptyObject([]), false);
-  });
+  t.false(isEmptyObject([1, 2, 3]));
+  t.false(isEmptyObject({ one: 1 }));
+  t.false(isEmptyObject([]), false);
 });

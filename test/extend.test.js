@@ -1,4 +1,4 @@
-const assert = require("assert");
+const test = require("ava");
 const extend = require("../src/extend");
 
 const options = {
@@ -18,33 +18,32 @@ const expected = {
   random: 42
 };
 
-describe("extend", () => {
-  let defaults = {};
+let defaults = {};
 
-  beforeEach(() => {
-    defaults = {
-      number: 1,
-      bool: true,
-      magic: "real",
-      animal: "whale",
-      croutons: "delicious"
-    };
-  });
+test.beforeEach(() => {
+  defaults = {
+    number: 1,
+    bool: true,
+    magic: "real",
+    animal: "whale",
+    croutons: "delicious"
+  };
+});
 
-  it("should be a function", () => {
-    assert(typeof extend === "function");
-  });
+test("extend should be a function", t => {
+  // t.assert(typeof extend === "function");
+  t.deepEqual(typeof extend, "function", "extend is not a function");
+});
 
-  it("should return a new object", () => {
-    assert(typeof extend() === "object");
-    assert.deepStrictEqual(extend(null, { a: "a" }), { a: "a" });
-    assert.deepStrictEqual(extend({ a: "a" }, null), { a: "a" });
-  });
+test("should return a new object", t => {
+  t.deepEqual(typeof extend(), "object", "extend returns something not object");
+  t.deepEqual(extend(null, { a: "a" }), { a: "a" });
+  t.deepEqual(extend({ a: "a" }, null), { a: "a" });
+});
 
-  it("should return correct object", () => {
-    assert.deepStrictEqual(extend(defaults, options), expected);
+test("should return correct object", t => {
+  t.deepEqual(extend(defaults, options), expected);
 
-    // defaults is modified
-    assert.deepStrictEqual(defaults, expected);
-  });
+  // defaults is modified
+  t.deepEqual(defaults, expected);
 });

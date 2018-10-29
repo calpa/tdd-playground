@@ -5,233 +5,224 @@
  * Licensed under the MIT License.
  */
 
-const assert = require("assert");
+const test = require("ava");
 const flatten = require("../src/flatten");
 
-describe("flatten", function() {
-  it("should be a function", () => {
-    assert(typeof flatten === "function");
-  });
+test("flatten should be a function", t => {
+  t.deepEqual(typeof flatten, "function", "flatten is not a function");
+});
 
-  it("should do nothing", () => {
-    assert.deepStrictEqual(flatten([]), []);
-    assert.deepStrictEqual(flatten([[[[[[[[[[[]]]]]]]]]]]), []);
-  });
+test("flatten should do nothing", t => {
+  t.deepEqual(flatten([]), []);
+  t.deepEqual(flatten([[[[[[[[[[[]]]]]]]]]]]), []);
+});
 
-  it("should flatten nested arrays:", function() {
-    assert.deepStrictEqual(flatten(["a", "b", ["c"], "d", ["e"]]), [
-      "a",
-      "b",
-      "c",
-      "d",
-      "e"
-    ]);
-  });
+test("flatten should flatten nested arrays:", t => {
+  t.deepEqual(flatten(["a", "b", ["c"], "d", ["e"]]), [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e"
+  ]);
+});
 
-  it("should flatten deeply nested arrays:", function() {
-    assert.deepStrictEqual(
-      flatten(["a", [[[[[[[["b", [["c"]]]]]], "d", ["e"]]]]]]),
-      ["a", "b", "c", "d", "e"]
-    );
-    assert.deepStrictEqual(flatten(["a", "b", ["c"], "d", ["e"]]), [
-      "a",
-      "b",
-      "c",
-      "d",
-      "e"
-    ]);
-    assert.deepEqual(
-      flatten([
+test("flatten should flatten deeply nested arrays:", t => {
+  t.deepEqual(flatten(["a", [[[[[[[["b", [["c"]]]]]], "d", ["e"]]]]]]), [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e"
+  ]);
+  t.deepEqual(flatten(["a", "b", ["c"], "d", ["e"]]), [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e"
+  ]);
+  t.deepEqual(
+    flatten([
+      [
+        "a",
         [
-          "a",
+          "b",
           [
-            "b",
+            "k",
             [
-              "k",
+              "a",
+              [
+                "b",
+                ["c"],
+                [
+                  [
+                    "a",
+                    [
+                      [
+                        "a",
+                        [
+                          "b",
+                          [
+                            "k",
+                            [
+                              "a",
+                              ["b", ["c"]],
+                              [
+                                "a",
+                                ["x", ["c"], ["a", ["x", ["k"]]], ["d", ["z"]]]
+                              ],
+                              ["d", ["m"]]
+                            ],
+                            ["d", ["e"]]
+                          ]
+                        ]
+                      ],
+                      ["d", ["e"]]
+                    ],
+                    [
+                      "b",
+                      [
+                        "k",
+                        [
+                          "a",
+                          ["b", ["c"]],
+                          [
+                            "a",
+                            ["x", ["c"], ["a", ["x", ["k"]]], ["d", ["z"]]]
+                          ],
+                          ["d", ["m"]]
+                        ],
+                        ["d", ["e"]]
+                      ]
+                    ]
+                  ],
+                  ["d", ["e"]]
+                ]
+              ],
               [
                 "a",
                 [
-                  "b",
+                  "x",
                   ["c"],
                   [
+                    "a",
+                    ["x", ["k"]],
                     [
-                      "a",
                       [
+                        "a",
                         [
-                          "a",
+                          "b",
                           [
-                            "b",
-                            [
-                              "k",
-                              [
-                                "a",
-                                ["b", ["c"]],
-                                [
-                                  "a",
-                                  [
-                                    "x",
-                                    ["c"],
-                                    ["a", ["x", ["k"]]],
-                                    ["d", ["z"]]
-                                  ]
-                                ],
-                                ["d", ["m"]]
-                              ],
-                              ["d", ["e"]]
-                            ]
-                          ]
-                        ],
-                        ["d", ["e"]]
-                      ],
-                      [
-                        "b",
-                        [
-                          "k",
-                          [
-                            "a",
-                            ["b", ["c"]],
+                            "k",
                             [
                               "a",
-                              ["x", ["c"], ["a", ["x", ["k"]]], ["d", ["z"]]]
-                            ],
-                            ["d", ["m"]]
-                          ],
-                          ["d", ["e"]]
-                        ]
-                      ]
-                    ],
-                    ["d", ["e"]]
-                  ]
-                ],
-                [
-                  "a",
-                  [
-                    "x",
-                    ["c"],
-                    [
-                      "a",
-                      ["x", ["k"]],
-                      [
-                        [
-                          "a",
-                          [
-                            "b",
-                            [
-                              "k",
+                              ["b", ["c"]],
                               [
                                 "a",
-                                ["b", ["c"]],
-                                [
-                                  "a",
-                                  [
-                                    "x",
-                                    ["c"],
-                                    ["a", ["x", ["k"]]],
-                                    ["d", ["z"]]
-                                  ]
-                                ],
-                                ["d", ["m"]]
+                                ["x", ["c"], ["a", ["x", ["k"]]], ["d", ["z"]]]
                               ],
-                              ["d", ["e"]]
-                            ]
+                              ["d", ["m"]]
+                            ],
+                            ["d", ["e"]]
                           ]
-                        ],
-                        ["d", ["e"]]
-                      ]
-                    ],
-                    ["d", ["z"]]
-                  ]
-                ],
-                ["d", ["m"]]
+                        ]
+                      ],
+                      ["d", ["e"]]
+                    ]
+                  ],
+                  ["d", ["z"]]
+                ]
               ],
-              ["d", ["e"]]
-            ]
+              ["d", ["m"]]
+            ],
+            ["d", ["e"]]
           ]
-        ],
-        ["d", ["e"]]
-      ]),
-      [
-        "a",
-        "b",
-        "k",
-        "a",
-        "b",
-        "c",
-        "a",
-        "a",
-        "b",
-        "k",
-        "a",
-        "b",
-        "c",
-        "a",
-        "x",
-        "c",
-        "a",
-        "x",
-        "k",
-        "d",
-        "z",
-        "d",
-        "m",
-        "d",
-        "e",
-        "d",
-        "e",
-        "b",
-        "k",
-        "a",
-        "b",
-        "c",
-        "a",
-        "x",
-        "c",
-        "a",
-        "x",
-        "k",
-        "d",
-        "z",
-        "d",
-        "m",
-        "d",
-        "e",
-        "d",
-        "e",
-        "a",
-        "x",
-        "c",
-        "a",
-        "x",
-        "k",
-        "a",
-        "b",
-        "k",
-        "a",
-        "b",
-        "c",
-        "a",
-        "x",
-        "c",
-        "a",
-        "x",
-        "k",
-        "d",
-        "z",
-        "d",
-        "m",
-        "d",
-        "e",
-        "d",
-        "e",
-        "d",
-        "z",
-        "d",
-        "m",
-        "d",
-        "e",
-        "d",
-        "e"
-      ]
-    );
-  });
+        ]
+      ],
+      ["d", ["e"]]
+    ]),
+    [
+      "a",
+      "b",
+      "k",
+      "a",
+      "b",
+      "c",
+      "a",
+      "a",
+      "b",
+      "k",
+      "a",
+      "b",
+      "c",
+      "a",
+      "x",
+      "c",
+      "a",
+      "x",
+      "k",
+      "d",
+      "z",
+      "d",
+      "m",
+      "d",
+      "e",
+      "d",
+      "e",
+      "b",
+      "k",
+      "a",
+      "b",
+      "c",
+      "a",
+      "x",
+      "c",
+      "a",
+      "x",
+      "k",
+      "d",
+      "z",
+      "d",
+      "m",
+      "d",
+      "e",
+      "d",
+      "e",
+      "a",
+      "x",
+      "c",
+      "a",
+      "x",
+      "k",
+      "a",
+      "b",
+      "k",
+      "a",
+      "b",
+      "c",
+      "a",
+      "x",
+      "c",
+      "a",
+      "x",
+      "k",
+      "d",
+      "z",
+      "d",
+      "m",
+      "d",
+      "e",
+      "d",
+      "e",
+      "d",
+      "z",
+      "d",
+      "m",
+      "d",
+      "e",
+      "d",
+      "e"
+    ]
+  );
 });

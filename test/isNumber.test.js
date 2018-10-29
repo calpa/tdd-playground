@@ -1,12 +1,8 @@
 // From isNumber test.js
-"use strict";
-
-const assert = require("assert");
+const test = require("ava");
 const isNumber = require("../src/isNumber");
 
-const isSameResult = (num, boolean) => isNumber(num) === boolean;
-
-describe("is a number", () => {
+test("is a number", t => {
   const fixtures = [
     0xff,
     5e3,
@@ -94,17 +90,12 @@ describe("is a number", () => {
     +new Date()
   ];
 
-  fixtures.forEach((num, idx) => {
-    it(JSON.stringify(num) + " should be a number", () => {
-      assert(
-        isSameResult(num, true),
-        'expected "' + String(num) + '" to be a number'
-      );
-    });
+  fixtures.forEach(num => {
+    t.true(isNumber(num), 'expected "' + String(num) + '" to be a number');
   });
 });
 
-describe("is not a number", () => {
+test("is not a number", t => {
   const fixtures = [
     "   ", // issue#3
     "\r\n\t", // issue#3
@@ -144,11 +135,6 @@ describe("is not a number", () => {
   ];
 
   fixtures.forEach(num => {
-    it(JSON.stringify(num) + " should not be a number", function() {
-      assert(
-        isSameResult(num, false),
-        'expected "' + String(num) + '" to not be a number'
-      );
-    });
+    t.false(isNumber(num), 'expected "' + String(num) + '" to not be a number');
   });
 });
