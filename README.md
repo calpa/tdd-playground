@@ -16,7 +16,7 @@ Test Driven Development (TDD)，指的是先寫最小部分的測試代碼，然
 
 在過去的一段時間里，我閱讀了一些下載量大，並以 TDD 開發模式實現的一些工具庫。比如說：
 
-1. [isEven](#isEven%20代碼解讀)
+1. [isEven](#iseven-代碼解讀)
 1. isObject
 1. isNumber
 1. isEmptyObject
