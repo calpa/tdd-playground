@@ -9,10 +9,7 @@
   "dependencies": {},
   "devDependencies": {
     "ava": "1.0.0-rc.1",
-    "intelli-espower-loader": "^1.0.1",
-    "mocha": "^5.2.0",
-    "nyc": "^13.1.0",
-    "power-assert": "^1.6.1"
+    "nyc": "^13.1.0"
   },
   "scripts": {
     "test": "ava",
